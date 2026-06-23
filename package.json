@@ -6,7 +6,7 @@
   },
   "private": true,
   "type": "module",
-  "homepage": "https://react-cool-todo-app.netlify.app/",
+  "homepage": "https://a7-task-manager.vercel.app/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Prem759-0/A7-task-manager.git"
