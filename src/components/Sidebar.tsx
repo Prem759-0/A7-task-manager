@@ -321,7 +321,7 @@ export const ProfileSidebar = () => {
 
         <StyledDivider />
 
-        <MenuLink to="https://github.com/maciekt07/TodoApp">
+        <MenuLink to="https://github.com/Prem759-0/A7-task-manager">
           <StyledMenuItem translate="no">
             <GitHub className="GitHubIcon" /> &nbsp; Github{" "}
             {stars && (
@@ -337,7 +337,7 @@ export const ProfileSidebar = () => {
           </StyledMenuItem>
         </MenuLink>
 
-        <MenuLink to="https://github.com/maciekt07/TodoApp/issues/new">
+        <MenuLink to="https://github.com/Prem759-0/A7-task-manager/issues/new">
           <StyledMenuItem>
             <BugReportRounded className="BugReportRoundedIcon" /> &nbsp; Report Issue{" "}
             {Boolean(issuesCount || issuesCount === 0) && (
@@ -353,7 +353,7 @@ export const ProfileSidebar = () => {
           </StyledMenuItem>
         </MenuLink>
 
-        <MenuLink to="https://www.buymeacoffee.com/maciekt07">
+        <MenuLink to="https://www.buymeacoffee.com/Prem759-0">
           <StyledMenuItem className="bmcMenu">
             <BmcIcon className="bmc-icon" src={theme.darkmode ? bmcLogoLight : bmcLogo} /> &nbsp;
             Buy me a coffee{" "}
@@ -456,9 +456,9 @@ export const ProfileSidebar = () => {
             <span style={{ marginLeft: "6px", marginRight: "4px" }}>by</span>
             <a
               style={{ textDecoration: "none", color: "inherit" }}
-              href="https://github.com/maciekt07"
+              href="https://github.com/Prem759-0"
             >
-              maciekt07
+              Prem Gaikwad
             </a>
           </CreditsContainer>
           <CreditsContainer>
