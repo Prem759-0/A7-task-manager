@@ -189,7 +189,7 @@ const NavigationButton = styled(BottomNavigationAction)`
 
   &.Mui-selected {
     border: 3px solid #000;
-    border-radius: 8px;
+    border-radius: 24px;
     background-color: ${({ theme }) => theme.palette.primary.main};
     color: ${({ theme }) => getFontColor(theme.palette.primary.main)};
     transform: translate(0, -6px);

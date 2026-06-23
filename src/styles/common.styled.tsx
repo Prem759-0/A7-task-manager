@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Avatar, AvatarProps, Button, css } from "@mui/material";
+import { PersonRounded } from "@mui/icons-material";
 import { getFontColor } from "../utils";
 import { CSSProperties } from "react";
 import { pulseAnimation, scale } from "./keyframes.styled";
@@ -54,8 +55,10 @@ interface UserAvatarProps {
   $pulse?: boolean;
 }
 
-const UnstyledAvatar = ({ ...props }: AvatarProps) => (
-  <Avatar translate={"no"} slotProps={{ img: { loading: "lazy" } }} {...props} />
+const UnstyledAvatar = ({ children, ...props }: AvatarProps) => (
+  <Avatar translate={"no"} slotProps={{ img: { loading: "lazy" } }} {...props}>
+    {children || <PersonRounded style={{ color: "#000", fontSize: "1.5em" }} />}
+  </Avatar>
 );
 
 export const UserAvatar = styled(UnstyledAvatar)<UserAvatarProps>`
