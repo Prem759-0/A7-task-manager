@@ -677,14 +677,13 @@ export const TasksList: React.FC = () => {
               />
             ))
           )
-        ) : (
+        ) : user.tasks.length === 0 ? (
           <NoTasks>
             <span>You don't have any tasks yet</span>
             <br />
             Click on the <span>+</span> button to add one
           </NoTasks>
-        )}
-        {search && orderedTasks.length === 0 && user.tasks.length > 0 ? (
+        ) : search ? (
           <TaskNotFound>
             <b>No tasks found</b>
             <br />
@@ -693,7 +692,14 @@ export const TasksList: React.FC = () => {
               <TaskIcon scale={0.8} />
             </div>
           </TaskNotFound>
-        ) : null}
+        ) : (
+          <TaskNotFound>
+            <b>No tasks found in this category</b>
+            <div style={{ marginTop: "14px" }}>
+              <TaskIcon scale={0.8} />
+            </div>
+          </TaskNotFound>
+        )}
         <EditTask
           open={editModalOpen}
           task={user.tasks.find((task) => task.id === selectedTaskId)}

@@ -63,7 +63,7 @@ export const TaskSort = () => {
         aria-controls={sortOpen ? "sort-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={sortOpen ? "true" : undefined}
-        isMenuOpen={sortOpen}
+        $isMenuOpen={sortOpen}
         disabled={moveMode}
       >
         {currentSortOption?.icon}
@@ -118,7 +118,7 @@ const StyledMenuItem = styled(MenuItem)<{ clr?: string }>`
   color: ${({ clr }) => clr || "unset"};
 `;
 
-const SortButton = styled(Button)<{ isMenuOpen: boolean }>`
+const SortButton = styled(Button)<{ $isMenuOpen: boolean }>`
   gap: 8px;
   text-transform: none;
   border-radius: 16px;
@@ -128,8 +128,8 @@ const SortButton = styled(Button)<{ isMenuOpen: boolean }>`
   color: ${({ theme }) => getFontColor(theme.secondary)};
   border: 1px solid ${({ theme }) => (isDark(theme.secondary) ? "#44479cb7" : theme.primary)} !important;
   transition: width 0.2s ease;
-  ${({ isMenuOpen, theme }) =>
-    isMenuOpen &&
+  ${({ $isMenuOpen, theme }) =>
+    $isMenuOpen &&
     css`
       background: ${isDark(theme.secondary)} ? "#090b228e" : "#ffffff8e";
       box-shadow: 

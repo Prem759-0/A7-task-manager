@@ -75,7 +75,7 @@ export const BottomNav = (): JSX.Element | null => {
     <Container>
       <StyledBottomNavigation
         showLabels
-        glow={settings.enableGlow}
+        $glow={settings.enableGlow}
         value={value}
         onChange={(_event, newValue: number) => {
           window.scrollTo({
@@ -112,7 +112,7 @@ export const BottomNav = (): JSX.Element | null => {
           icon={
             <AddIconContainer
               clr={theme.palette.primary.main}
-              animate={tasks.length === 0 && value !== 2}
+              $animate={tasks.length === 0 && value !== 2}
             >
               <AddIcon clr={theme.palette.primary.main} fontSize="large" />
             </AddIconContainer>
@@ -133,7 +133,7 @@ export const BottomNav = (): JSX.Element | null => {
   );
 };
 
-const AddIconContainer = styled(Box)<{ clr: string; animate: boolean }>`
+const AddIconContainer = styled(Box)<{ clr: string; $animate: boolean }>`
   border-radius: 100px;
   padding: 0;
   margin: 0 !important;
@@ -141,8 +141,8 @@ const AddIconContainer = styled(Box)<{ clr: string; animate: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${({ animate, theme }) =>
-    animate &&
+  ${({ $animate, theme }) =>
+    $animate &&
     css`
       animation: ${pulseAnimation(theme.palette.primary.main, 10)} 1.2s infinite;
     `};
@@ -167,7 +167,7 @@ const Container = styled(Box)`
   z-index: 999;
 `;
 
-const StyledBottomNavigation = styled(BottomNavigation)<{ glow: boolean }>`
+const StyledBottomNavigation = styled(BottomNavigation)<{ $glow: boolean }>`
   background: ${({ theme }) => theme.palette.secondary.main};
   border-top: 5px solid #000;
   box-shadow: 0px -4px 0px rgba(0, 0, 0, 0.1);

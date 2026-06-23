@@ -55,11 +55,15 @@ interface UserAvatarProps {
   $pulse?: boolean;
 }
 
-const UnstyledAvatar = ({ children, ...props }: AvatarProps) => (
-  <Avatar translate={"no"} slotProps={{ img: { loading: "lazy" } }} {...props}>
-    {children || <PersonRounded style={{ color: "#000", fontSize: "1.5em" }} />}
-  </Avatar>
-);
+const UnstyledAvatar = ({ children, ...props }: AvatarProps & UserAvatarProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { $hasImage, size, $pulse, ...rest } = props;
+  return (
+    <Avatar translate={"no"} slotProps={{ img: { loading: "lazy" } }} {...rest}>
+      {children || <PersonRounded style={{ color: "#000", fontSize: "1.5em" }} />}
+    </Avatar>
+  );
+};
 
 export const UserAvatar = styled(UnstyledAvatar)<UserAvatarProps>`
   color: #ffffff;
