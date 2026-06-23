@@ -101,6 +101,17 @@ export const muiComponentsProps: Theme["components"] = {
       },
     },
   },
+  MuiInputLabel: {
+    styleOverrides: {
+      root: {
+        "&.MuiInputLabel-shrink": {
+          backgroundColor: "#fff",
+          padding: "0 6px",
+          borderRadius: "4px",
+        },
+      },
+    },
+  },
   MuiTextField: {
     styleOverrides: {
       root: {
