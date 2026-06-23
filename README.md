@@ -126,7 +126,7 @@ git clone https://github.com/Prem759-0/A7-task-manager.git
 2. Navigate to the project directory:
 
 ```bash
-cd TodoApp
+cd A7-task-manager
 ```
 
 3. Install the dependencies:

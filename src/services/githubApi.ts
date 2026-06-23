@@ -2,7 +2,7 @@ import type { GitHubBranchResponse, GitHubInfoResponse, GitHubRepoResponse } fro
 import { showToast } from "../utils";
 
 const username = "Prem759-0";
-const repo = "TodoApp";
+const repo = "A7-task-manager";
 const branch = "main";
 
 const repoURL = `https://api.github.com/repos/${username}/${repo}`;
