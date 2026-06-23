@@ -55,8 +55,8 @@ export const TopBar = ({ title }: TopBarProps) => {
 
 const StyledAppBar = styled(AppBar)`
   z-index: 99;
-  background: ${({ theme }) => theme.palette.secondary.main};
-  color: ${({ theme }) => getFontColor(theme.palette.secondary.main)};
+  background: ${({ theme }) => theme.secondary};
+  color: ${({ theme }) => getFontColor(theme.secondary)};
   box-shadow: 0px 6px 0px #000;
   border-bottom: 4px solid #000;
   @media (min-width: 1024px) {

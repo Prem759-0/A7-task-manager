@@ -271,6 +271,14 @@ export const TasksList: React.FC = () => {
       const newlyDoneCount = prevUser.tasks.filter(
         (t) => multipleSelectedTasks.includes(t.id) && !t.done,
       ).length;
+      const updatedTasks = prevUser.tasks.map((task) => {
+        if (multipleSelectedTasks.includes(task.id)) {
+          // Mark the task as done if selected
+          return { ...task, done: true, lastSave: new Date() };
+        }
+        return task;
+      });
+
       const gamificationUpdate = awardGamification(
         prevUser,
         newlyDoneCount > 0,
@@ -281,13 +289,7 @@ export const TasksList: React.FC = () => {
       return {
         ...prevUser,
         ...gamificationUpdate,
-        tasks: prevUser.tasks.map((task) => {
-          if (multipleSelectedTasks.includes(task.id)) {
-            // Mark the task as done if selected
-            return { ...task, done: true, lastSave: new Date() };
-          }
-          return task;
-        }),
+        tasks: updatedTasks,
       };
     });
     // Clear the selected task IDs after the operation
