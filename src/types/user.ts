@@ -32,6 +32,9 @@ export interface User {
   theme: "system" | (string & {});
   darkmode: DarkModeOptions;
   lastSyncedAt?: Date;
+  xp: number;
+  streak: number;
+  lastActiveDate: Date | null;
 }
 
 /**
@@ -57,6 +60,10 @@ export interface Task {
    * Optional numeric position for drag-and-drop (for p2p sync)
    */
   position?: number;
+  /**
+   * Estimated time in minutes for the Two-Minute rule feature
+   */
+  estimatedMinutes?: number;
 }
 
 /**

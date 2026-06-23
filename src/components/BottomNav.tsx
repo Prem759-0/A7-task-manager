@@ -174,9 +174,9 @@ const Container = styled(Box)`
 `;
 
 const StyledBottomNavigation = styled(BottomNavigation)<{ glow: boolean }>`
-  /* border-radius: 24px 24px 0 0; */
-  background: ${({ theme, glow }) => `${theme.palette.secondary.main}${glow ? "c8" : "e6"}`};
-  backdrop-filter: blur(20px);
+  background: ${({ theme }) => theme.palette.secondary.main};
+  border-top: 5px solid #000;
+  box-shadow: 0px -4px 0px rgba(0, 0, 0, 0.1);
   margin: 0px 20px 0px -20px;
   padding: 18px 10px 32px 10px;
   transition:
@@ -188,9 +188,18 @@ const StyledBottomNavigation = styled(BottomNavigation)<{ glow: boolean }>`
 `;
 
 const NavigationButton = styled(BottomNavigationAction)`
-  border-radius: 18px;
+  border: 3px solid transparent;
   margin: 4px;
   color: ${({ theme }) => getFontColor(theme.palette.secondary.main)};
+  transition: all 0.1s ease;
+
+  &.Mui-selected {
+    border: 3px solid #000;
+    border-radius: 8px;
+    background-color: #fff;
+    transform: translate(0, -6px);
+    box-shadow: 4px 4px 0px #000;
+  }
 
   &:disabled {
     opacity: 0.6;
@@ -201,5 +210,7 @@ const NavigationButton = styled(BottomNavigationAction)`
 
   & .MuiBottomNavigationAction-label {
     font-size: 13px !important;
+    font-family: "Bangers", cursive !important;
+    letter-spacing: 1px;
   }
 `;

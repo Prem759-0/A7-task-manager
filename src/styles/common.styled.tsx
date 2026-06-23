@@ -49,9 +49,9 @@ export const StyledLink = styled.a<{ clr?: string }>`
 // linear-gradient(#A4AAB7, #868B95)
 
 interface UserAvatarProps {
-  hasimage: boolean;
+  $hasImage: boolean;
   size: CSSProperties["height"];
-  pulse?: boolean;
+  $pulse?: boolean;
 }
 
 const UnstyledAvatar = ({ ...props }: AvatarProps) => (
@@ -60,15 +60,15 @@ const UnstyledAvatar = ({ ...props }: AvatarProps) => (
 
 export const UserAvatar = styled(UnstyledAvatar)<UserAvatarProps>`
   color: #ffffff;
-  background: ${({ hasimage, theme }) =>
-    hasimage ? "#ffffff1c" : theme.darkmode ? "#5e5e65" : "#8c919c"} !important;
+  background: ${({ $hasImage, theme }) =>
+    $hasImage ? "#ffffff1c" : theme.darkmode ? "#5e5e65" : "#8c919c"} !important;
   transition: 0.3s background;
   font-weight: 500;
   width: ${({ size }) => size};
   height: ${({ size }) => size};
   font-size: ${({ size }) => `calc(${size} / 2)`};
-  ${({ pulse, theme }) =>
-    pulse &&
+  ${({ $pulse, theme }) =>
+    $pulse &&
     css`
       animation: ${pulseAnimation(theme.darkmode ? "#5e5e65" : "#8c919c", 10)} 1.2s infinite;
     `}

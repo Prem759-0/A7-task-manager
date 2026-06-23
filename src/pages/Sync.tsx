@@ -100,7 +100,10 @@ export default function Sync() {
         {!mode && (
           <>
             <FeatureDescription>
-              <DevicesRounded sx={{ fontSize: 40, color: (theme) => theme.palette.primary.main }} />
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              <DevicesRounded
+                sx={{ fontSize: 40, color: (theme: any) => theme.palette.primary.main }}
+              />
               <Typography variant="h5" sx={{ fontWeight: 600, mb: 1 }}>
                 Sync Data Between Devices
               </Typography>

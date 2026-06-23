@@ -93,6 +93,7 @@ export const EditTask = ({ open, task, onClose }: EditTaskProps) => {
             emoji: editedTask.emoji || undefined,
             description: editedTask.description || undefined,
             deadline: editedTask.deadline || undefined,
+            estimatedMinutes: editedTask.estimatedMinutes || undefined,
             category: editedTask.category || undefined,
             lastSave: new Date(),
           };
@@ -247,6 +248,14 @@ export const EditTask = ({ open, task, onClose }: EditTaskProps) => {
               transition: ".3s all",
             },
           }}
+        />
+        <StyledInput
+          label="Estimated Time (Minutes) [Optional]"
+          name="estimatedMinutes"
+          type="number"
+          value={editedTask?.estimatedMinutes || ""}
+          onChange={handleInputChange}
+          inputProps={{ min: 1 }}
         />
 
         {settings.enableCategories !== undefined && settings.enableCategories && (

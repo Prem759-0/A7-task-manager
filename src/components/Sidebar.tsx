@@ -24,6 +24,8 @@ import {
   TaskAltRounded,
   ThumbUpRounded,
   AssignmentRounded,
+  LocalFireDepartmentRounded,
+  EmojiEventsRounded,
 } from "@mui/icons-material";
 import {
   Dialog,
@@ -52,6 +54,7 @@ import {
   showToast,
   systemInfo,
   timeAgo,
+  calculateLevel,
 } from "../utils";
 
 export const ProfileSidebar = () => {
@@ -211,8 +214,8 @@ export const ProfileSidebar = () => {
           <UserAvatar
             src={avatarSrc || undefined}
             alt={name || "User"}
-            hasimage={profilePicture !== null}
-            pulse={
+            $hasImage={profilePicture !== null}
+            $pulse={
               user.name === defaultUser.name &&
               user.profilePicture === defaultUser.profilePicture &&
               JSON.stringify(user.settings) === JSON.stringify(defaultUser.settings)
@@ -255,6 +258,19 @@ export const ProfileSidebar = () => {
             <span>.</span>
           </LogoText>
         </LogoContainer>
+
+        <PlayerStatsContainer>
+          <Tooltip title={`${user.xp || 0} Total XP`}>
+            <StatBadge clr="#FF9D00">
+              <EmojiEventsRounded /> Lvl {calculateLevel(user.xp || 0)}
+            </StatBadge>
+          </Tooltip>
+          <Tooltip title={`${user.streak || 0} Day Streak`}>
+            <StatBadge clr="#FF5018">
+              <LocalFireDepartmentRounded /> {user.streak || 0}
+            </StatBadge>
+          </Tooltip>
+        </PlayerStatsContainer>
 
         <MenuLink to="/">
           <StyledMenuItem onClick={handleClose}>
@@ -436,7 +452,7 @@ export const ProfileSidebar = () => {
             <ProfileMenuItem translate={name ? "no" : "yes"} onClick={handleClose}>
               <UserAvatar
                 src={avatarSrc || undefined}
-                hasimage={profilePicture !== null}
+                $hasImage={profilePicture !== null}
                 size="44px"
               >
                 {name ? name[0].toUpperCase() : undefined}
@@ -731,6 +747,25 @@ const LogoText = styled.h2`
   & span {
     color: #7764e8;
   }
+`;
+
+const PlayerStatsContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 16px;
+  background: ${({ theme }) => (theme.darkmode ? "#252525" : "#e0e0e0")};
+  border-radius: 16px;
+  margin: 0 12px 16px 12px;
+  font-weight: bold;
+`;
+
+const StatBadge = styled.div<{ clr: string }>`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: ${({ clr }) => clr};
+  font-size: 16px;
 `;
 
 const BmcIcon = styled.img`

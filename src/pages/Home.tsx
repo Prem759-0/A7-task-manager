@@ -15,6 +15,7 @@ import {
 
 import { Emoji } from "emoji-picker-react";
 import { Box, Button, CircularProgress, Tooltip, Typography } from "@mui/material";
+import { useTheme } from "@emotion/react";
 import { useOnlineStatus } from "../hooks/useOnlineStatus";
 import { AddRounded, CloseRounded, TodayRounded, UndoRounded, WifiOff } from "@mui/icons-material";
 import { UserContext } from "../contexts/UserContext";
@@ -34,6 +35,7 @@ const Home = () => {
   const isOnline = useOnlineStatus();
   const n = useNavigate();
   const isMobile = useResponsiveDisplay();
+  const theme = useTheme();
 
   useEffect(() => {
     document.title = "Todo App";
@@ -61,6 +63,16 @@ const Home = () => {
       tasksWithDeadlineTodayCount: dueTodayTasks.length,
       tasksDueTodayNames: taskNamesDueToday,
     };
+  }, [tasks]);
+
+  const quickWins = useMemo(() => {
+    return tasks.filter(
+      (t) =>
+        !t.done &&
+        (t.estimatedMinutes !== undefined
+          ? t.estimatedMinutes <= 2
+          : /quick|email|call|reply|message|pay/i.test(t.name)),
+    );
   }, [tasks]);
 
   // Memoize time-based greeting
@@ -194,6 +206,37 @@ const Home = () => {
           </TasksCount>
         </TasksCountContainer>
       )}
+
+      {quickWins.length > 0 && (
+        <TasksCountContainer style={{ marginTop: settings.showProgressBar ? "24px" : "0" }}>
+          <TasksCount
+            glow={settings.enableGlow}
+            style={{ background: theme.darkmode ? "#ffb300" : "#ffc107", color: "#000" }}
+          >
+            <TaskCountTextContainer>
+              <TaskCountHeader>⚡ Quick Wins</TaskCountHeader>
+              <TaskCompletionText style={{ color: "#000", opacity: 0.8 }}>
+                You have {quickWins.length} tasks that take 2 minutes or less. Do them right now!
+              </TaskCompletionText>
+              <div style={{ display: "flex", gap: "8px", marginTop: "12px", flexWrap: "wrap" }}>
+                {quickWins.map((t) => (
+                  <Button
+                    key={t.id}
+                    variant="outlined"
+                    style={{ borderColor: "#000", color: "#000", fontWeight: "bold" }}
+                    onClick={() => {
+                      document.getElementById(t.id)?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    {t.name}
+                  </Button>
+                ))}
+              </div>
+            </TaskCountTextContainer>
+          </TasksCount>
+        </TasksCountContainer>
+      )}
+
       <Suspense
         fallback={
           <Box display="flex" justifyContent="center" alignItems="center">

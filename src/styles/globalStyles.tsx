@@ -18,15 +18,31 @@ export const GlobalStyles = () => {
     <Global
       styles={css`
         * {
-          font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif !important;
+          font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", sans-serif !important;
           -webkit-tap-highlight-color: transparent;
           &::selection {
-            background-color: #000 !important;
-            color: #fff !important;
+            background-color: ${ColorPalette.yellow} !important;
+            color: #000 !important;
           }
+          cursor:
+            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><filter id="s"><feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="%23000"/></filter><path filter="url(%23s)" fill="%233ae836" stroke="%23000" stroke-width="3" stroke-linejoin="round" d="M8,8 L20,38 L24.5,24.5 L38,20 Z"/></svg>')
+              8 8,
+            auto;
+        }
+        a,
+        button,
+        [role="button"],
+        .MuiButtonBase-root,
+        input[type="submit"],
+        input[type="button"],
+        .cursor-pointer {
+          cursor:
+            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 32 32"><filter id="s"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-color="%23000"/></filter><path filter="url(%23s)" fill="%23FFEA28" stroke="%23000" stroke-width="2" stroke-linejoin="round" d="M11,14 L11,5 C11,3.5 13,3.5 13,5 L13,11 L15,9 C16,8 17.5,9 17.5,10.5 L17.5,13 L19,11 C20,10 21.5,11 21.5,12.5 L21.5,14 L23,12 C24,11 25.5,12 25.5,13.5 L25.5,19 C25.5,24 21,28 16,28 C11,28 8,24 8,19 L8,15 L11,14 Z"/></svg>')
+              18 6,
+            pointer;
         }
         :root {
-          font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
+          font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", sans-serif;
           line-height: 1.5;
           font-weight: 400;
           color-scheme: ${theme.darkmode ? "dark" : "light"};
@@ -116,23 +132,25 @@ export const GlobalStyles = () => {
 
           /* Custom Scrollbar Styles */
           ::-webkit-scrollbar {
-            width: 8px;
-
-            background-color: ${theme.secondary};
+            width: 16px;
+            background-color: ${ColorPalette.yellow};
+            border-left: 4px solid #000;
           }
 
           ::-webkit-scrollbar-thumb {
-            background-color: ${theme.primary};
-            border-radius: 64px;
+            background-color: ${ColorPalette.cyan};
+            border: 4px solid #000;
+            border-right: none;
+            border-radius: 0px;
           }
 
           ::-webkit-scrollbar-thumb:hover {
-            background-color: ${theme.primary + "d8"};
+            background-color: ${ColorPalette.magenta};
           }
 
           ::-webkit-scrollbar-track {
-            border-radius: 64px;
-            background-color: ${theme.secondary};
+            background-color: ${ColorPalette.yellow};
+            border-left: 4px solid #000;
           }
         }
 
@@ -184,23 +202,25 @@ export const GlobalStyles = () => {
         .customScrollbar,
         textarea {
           ::-webkit-scrollbar {
-            width: 8px;
-            border-radius: 4px;
-            background-color: #84848415;
+            width: 12px;
+            border-left: 3px solid #000;
+            background-color: ${ColorPalette.yellow};
           }
 
           ::-webkit-scrollbar-thumb {
-            background-color: #8484844b;
-            border-radius: 4px;
+            background-color: ${ColorPalette.green};
+            border: 3px solid #000;
+            border-right: none;
+            border-radius: 0px;
           }
 
           ::-webkit-scrollbar-thumb:hover {
-            background-color: #84848476;
+            background-color: ${ColorPalette.magenta};
           }
 
           ::-webkit-scrollbar-track {
-            border-radius: 4px;
-            background-color: #84848415;
+            background-color: ${ColorPalette.yellow};
+            border-left: 3px solid #000;
           }
         }
 
@@ -231,7 +251,9 @@ export const GlobalStyles = () => {
         .MuiDialog-container {
           backdrop-filter: blur(4px);
         }
-        .MuiDialog-paper, .MuiMenu-paper, .MuiDrawer-paper {
+        .MuiDialog-paper,
+        .MuiMenu-paper,
+        .MuiDrawer-paper {
           animation: ${popIn} 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
         .MuiButton-contained {

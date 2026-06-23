@@ -15,6 +15,9 @@ export const defaultUser: User = {
   deletedTasks: [],
   theme: "system",
   darkmode: "auto",
+  xp: 0,
+  streak: 0,
+  lastActiveDate: null,
   settings: {
     enableCategories: true,
     doneToBottom: false,

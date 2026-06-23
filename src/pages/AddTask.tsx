@@ -26,6 +26,11 @@ const AddTask = () => {
     "description",
     "sessionStorage",
   );
+  const [estimatedMinutes, setEstimatedMinutes] = useStorageState<string>(
+    "",
+    "estimatedMinutes",
+    "sessionStorage",
+  );
   const [deadline, setDeadline] = useStorageState<string>("", "deadline", "sessionStorage");
   const [nameError, setNameError] = useState<string>("");
   const [descriptionError, setDescriptionError] = useState<string>("");
@@ -110,6 +115,7 @@ const AddTask = () => {
       color,
       date: new Date(),
       deadline: deadline !== "" ? new Date(deadline) : undefined,
+      estimatedMinutes: estimatedMinutes !== "" ? parseInt(estimatedMinutes) : undefined,
       category: selectedCategories ? selectedCategories : [],
     };
 
@@ -129,7 +135,15 @@ const AddTask = () => {
       },
     );
 
-    const itemsToRemove = ["name", "color", "description", "emoji", "deadline", "categories"];
+    const itemsToRemove = [
+      "name",
+      "color",
+      "description",
+      "emoji",
+      "deadline",
+      "categories",
+      "estimatedMinutes",
+    ];
     itemsToRemove.map((item) => sessionStorage.removeItem(item));
   };
 
@@ -210,6 +224,15 @@ const AddTask = () => {
                   ) : undefined,
               },
             }}
+          />
+          <StyledInput
+            label="Estimated Time (Minutes) [Optional]"
+            name="estimatedMinutes"
+            placeholder="e.g. 5"
+            type="number"
+            value={estimatedMinutes}
+            onChange={(e) => setEstimatedMinutes(e.target.value)}
+            inputProps={{ min: 1 }}
           />
 
           {user.settings.enableCategories !== undefined && user.settings.enableCategories && (

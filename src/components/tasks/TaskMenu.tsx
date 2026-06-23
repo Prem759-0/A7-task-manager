@@ -23,11 +23,11 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import "react-spring-bottom-sheet/dist/style.css";
-import { TaskIcon, TaskItem } from "..";
+import { TaskIcon, TaskItem, FocusModeDialog } from "..";
 import { UserContext } from "../../contexts/UserContext";
 import { useResponsiveDisplay } from "../../hooks/useResponsiveDisplay";
 import { Task } from "../../types/user";
-import { calculateDateDifference, generateUUID, showToast } from "../../utils";
+import { calculateDateDifference, generateUUID, showToast, awardGamification } from "../../utils";
 import { useTheme } from "@emotion/react";
 import { TaskContext } from "../../contexts/TaskContext";
 import { ColorPalette } from "../../theme/themeConfig";
@@ -51,6 +51,7 @@ export const TaskMenu = () => {
     setSearch,
   } = useContext(TaskContext);
   const [showShareDialog, setShowShareDialog] = useState<boolean>(false);
+  const [focusModeOpen, setFocusModeOpen] = useState<boolean>(false);
 
   const isMobile = useResponsiveDisplay();
   const n = useNavigate();
@@ -76,10 +77,14 @@ export const TaskMenu = () => {
         }
         return task;
       });
-      setUser((prevUser) => ({
-        ...prevUser,
-        tasks: updatedTasks,
-      }));
+      setUser((prevUser) => {
+        const gamificationUpdate = awardGamification(prevUser, !selectedTask.done);
+        return {
+          ...prevUser,
+          ...gamificationUpdate,
+          tasks: updatedTasks,
+        };
+      });
 
       const allTasksDone = updatedTasks.every((task) => task.done);
 
@@ -311,6 +316,16 @@ export const TaskMenu = () => {
       <LaunchRounded /> &nbsp; Task details
     </StyledMenuItem>,
 
+    <StyledMenuItem
+      key="focus"
+      onClick={() => {
+        setFocusModeOpen(true);
+        handleCloseMoreMenu();
+      }}
+    >
+      <span>🎯</span> &nbsp; Focus on this Task
+    </StyledMenuItem>,
+
     ...(settings.enableReadAloud && "speechSynthesis" in window
       ? [
           <StyledMenuItem
@@ -423,6 +438,11 @@ export const TaskMenu = () => {
         open={showShareDialog}
         onClose={() => setShowShareDialog(false)}
         selectedTask={selectedTask}
+      />
+      <FocusModeDialog
+        open={focusModeOpen}
+        onClose={() => setFocusModeOpen(false)}
+        task={selectedTask}
       />
     </>
   );

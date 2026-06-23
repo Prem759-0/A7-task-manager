@@ -249,8 +249,8 @@ const UserProfile = () => {
           >
             <UserAvatar
               onClick={handleOpenImageDialog}
-              src={avatarSrc || undefined}
-              hasimage={profilePicture !== null}
+              src={(profilePicture as string) || undefined}
+              $hasImage={profilePicture !== null}
               style={{ cursor: "pointer" }}
               size="96px"
             >

@@ -3,11 +3,15 @@ export const ColorPalette = {
   fontLight: "#ffffff",
   darkMode: "#1a1a1a",
   lightMode: "#ffffff",
-  purple: "#d946ef",
-  red: "#ef4444",
-  orange: "#f97316",
+  purple: "#c241ff",
+  red: "#ff2f2f",
+  orange: "#ff9518",
   orangeDark: "#ea580c",
-  blue: "#3b82f6",
+  blue: "#248eff",
+  cyan: "#00f0ff",
+  magenta: "#ff007f",
+  yellow: "#ffea28",
+  green: "#3ae836",
 } as const satisfies Record<string, string>;
 
 export const themeConfig: { [key: string]: { primaryColor: string; secondaryColor?: string } } = {
@@ -27,7 +31,7 @@ export const themeConfig: { [key: string]: { primaryColor: string; secondaryColo
     primaryColor: "#000000",
     secondaryColor: "#86efac",
   },
-  "Cyberpunk": {
+  Cyberpunk: {
     primaryColor: "#fde047",
     secondaryColor: "#000000",
   },

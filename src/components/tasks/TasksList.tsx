@@ -29,7 +29,7 @@ import { useStorageState } from "../../hooks/useStorageState";
 import { DialogBtn } from "../../styles";
 import { ColorPalette } from "../../theme/themeConfig";
 import type { Category, Task, UUID } from "../../types/user";
-import { getFontColor, showToast } from "../../utils";
+import { getFontColor, showToast, awardGamification } from "../../utils";
 import {
   NoTasks,
   RingAlarm,
@@ -267,16 +267,24 @@ export const TasksList: React.FC = () => {
   };
 
   const handleMarkSelectedAsDone = () => {
-    setUser((prevUser) => ({
-      ...prevUser,
-      tasks: prevUser.tasks.map((task) => {
-        if (multipleSelectedTasks.includes(task.id)) {
-          // Mark the task as done if selected
-          return { ...task, done: true, lastSave: new Date() };
-        }
-        return task;
-      }),
-    }));
+    setUser((prevUser) => {
+      const newlyDoneCount = prevUser.tasks.filter(
+        (t) => multipleSelectedTasks.includes(t.id) && !t.done,
+      ).length;
+      const gamificationUpdate = awardGamification(prevUser, newlyDoneCount > 0, newlyDoneCount);
+
+      return {
+        ...prevUser,
+        ...gamificationUpdate,
+        tasks: prevUser.tasks.map((task) => {
+          if (multipleSelectedTasks.includes(task.id)) {
+            // Mark the task as done if selected
+            return { ...task, done: true, lastSave: new Date() };
+          }
+          return task;
+        }),
+      };
+    });
     // Clear the selected task IDs after the operation
     setMultipleSelectedTasks([]);
   };

@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import { Alarm, RadioButtonChecked, RadioButtonUnchecked } from "@mui/icons-material";
 import { Checkbox, IconButton, TextField, css } from "@mui/material";
-import { fadeIn, ring, scale, wobble, comicFloat } from "../../styles/keyframes.styled";
-import { ColorPalette } from "../../theme/themeConfig";
+import { fadeIn, ring, scale, comicFloat } from "../../styles/keyframes.styled";
 import { getFontColor, isDark, systemInfo } from "../../utils";
 import { reduceMotion } from "../../styles/reduceMotion.styled";
 
@@ -35,13 +34,13 @@ export const TaskContainer = styled.div<TaskComponentProps>`
     glow && !done ? `0 0 2px ${getFontColor(backgroundColor)}78` : "none"}; */
   filter: ${({ blur }) => (blur ? "blur(2px) opacity(75%)" : "none")};
   backdrop-filter: ${({ done }) => (done ? "blur(6px)" : "none")};
-  
+
   border: 4px solid #000;
   box-shadow: 6px 6px 0px #000;
   transform: rotate(-0.5deg);
   &:hover {
-    animation: ${wobble} 0.5s ease-in-out infinite;
     box-shadow: 2px 2px 0px #000;
+    ${({ isDragging }) => !isDragging && `transform: translate(-2px, -2px) rotate(-1.5deg);`}
   }
   /* If the theme color and task color are the same, it changes the selection color to be different. */
   *::selection {
@@ -220,7 +219,9 @@ export const TaskActionContainer = styled.div`
   z-index: 1;
   backdrop-filter: blur(24px);
 
-  animation: ${fadeIn} 0.3s ease-in, ${comicFloat} 3s ease-in-out infinite;
+  animation:
+    ${fadeIn} 0.3s ease-in,
+    ${comicFloat} 3s ease-in-out infinite;
   border: 4px solid #000;
   box-shadow: 6px 6px 0px #000;
   ${({ theme }) => reduceMotion(theme)}

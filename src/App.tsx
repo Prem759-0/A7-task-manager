@@ -65,7 +65,7 @@ function App() {
             <div>
               Added new property to user object{" "}
               <i translate="no">
-                {key.toString()}: {userObject[key].toString()}
+                {String(key)}: {String(userObject[key])}
               </i>
             </div>,
             {

@@ -42,7 +42,7 @@ const Assignment: React.FC = () => {
 
   const handleGrandparentBubble = () => logEvent("Bubbling", "Grandparent");
   const handleParentBubble = () => logEvent("Bubbling", "Parent");
-  const handleChildBubble = (e: React.MouseEvent) => {
+  const handleChildBubble = () => {
     logEvent("Bubbling", "Child");
   };
 
@@ -217,32 +217,34 @@ const Assignment: React.FC = () => {
       <BrutalContainer className="bg-yellow">
         <SpeechBubble>ZAP!</SpeechBubble>
         <ComicHeading>DOM Assignment Playground</ComicHeading>
-        <p><strong>Warning:</strong> Highly interactive Neo-Brutalist elements ahead!</p>
+        <p>
+          <strong>Warning:</strong> Highly interactive Neo-Brutalist elements ahead!
+        </p>
       </BrutalContainer>
 
       {/* 1. Browser Rendering Pipeline Section */}
       <BrutalContainer className="bg-blue">
         <ComicHeading style={{ fontSize: "1.5rem" }}>1. Browser Rendering Pipeline</ComicHeading>
         <FlowchartContainer>
-          <div style={{ display: 'flex', gap: '20px' }}>
+          <div style={{ display: "flex", gap: "20px" }}>
             <FlowchartCard className="html">HTML</FlowchartCard>
             <FlowchartCard className="css">CSS</FlowchartCard>
           </div>
-          <div style={{ display: 'flex', gap: '80px' }}>
-             <FlowArrow>↓</FlowArrow>
-             <FlowArrow>↓</FlowArrow>
+          <div style={{ display: "flex", gap: "80px" }}>
+            <FlowArrow>↓</FlowArrow>
+            <FlowArrow>↓</FlowArrow>
           </div>
-          <div style={{ display: 'flex', gap: '20px' }}>
+          <div style={{ display: "flex", gap: "20px" }}>
             <FlowchartCard className="html">Parsing / Tokenization</FlowchartCard>
             <FlowchartCard className="css">Parsing</FlowchartCard>
           </div>
-          <div style={{ display: 'flex', gap: '80px' }}>
-             <FlowArrow>↓</FlowArrow>
-             <FlowArrow>↓</FlowArrow>
+          <div style={{ display: "flex", gap: "80px" }}>
+            <FlowArrow>↓</FlowArrow>
+            <FlowArrow>↓</FlowArrow>
           </div>
-          <div style={{ display: 'flex', gap: '20px' }}>
+          <div style={{ display: "flex", gap: "20px" }}>
             <FlowchartCard className="dom">DOM Tree</FlowchartCard>
-            <span style={{ fontSize: '2rem', fontWeight: 'bold', alignSelf: 'center' }}>+</span>
+            <span style={{ fontSize: "2rem", fontWeight: "bold", alignSelf: "center" }}>+</span>
             <FlowchartCard className="dom">CSSOM Tree</FlowchartCard>
           </div>
           <FlowArrow>↓</FlowArrow>
@@ -261,9 +263,12 @@ const Assignment: React.FC = () => {
         <p>Change the value and click "Check" to see the difference.</p>
         <BrutalInput ref={attrInputRef} defaultValue="Hello" placeholder="Type here..." />
         <br />
-        <BrutalButton className="action" onClick={checkAttrVsProp}>Check Values</BrutalButton>
+        <BrutalButton className="action" onClick={checkAttrVsProp}>
+          Check Values
+        </BrutalButton>
         <BrutalCode>
-          Attribute Value [input.getAttribute("value")]: {attrLog.attr}<br/>
+          Attribute Value [input.getAttribute("value")]: {attrLog.attr}
+          <br />
           Property Value [input.value]: {attrLog.prop}
         </BrutalCode>
       </BrutalContainer>
@@ -272,30 +277,40 @@ const Assignment: React.FC = () => {
       <BrutalContainer className="bg-green">
         <ComicHeading style={{ fontSize: "1.5rem" }}>3. Event Propagation</ComicHeading>
         <p>Click the child button and watch the console (and logs below)!</p>
-        
-        <div 
-          onClickCapture={handleGrandparentCapture} onClick={handleGrandparentBubble}
-          style={{ border: '3px solid black', padding: '20px', background: '#fff' }}
+
+        <div
+          onClickCapture={handleGrandparentCapture}
+          onClick={handleGrandparentBubble}
+          style={{ border: "3px solid black", padding: "20px", background: "#fff" }}
         >
           Grandparent
-          <div 
-            onClickCapture={handleParentCapture} onClick={handleParentBubble}
-            style={{ border: '3px solid black', padding: '20px', margin: '10px 0', background: '#f8fafc' }}
+          <div
+            onClickCapture={handleParentCapture}
+            onClick={handleParentBubble}
+            style={{
+              border: "3px solid black",
+              padding: "20px",
+              margin: "10px 0",
+              background: "#f8fafc",
+            }}
           >
             Parent
             <br />
-            <BrutalButton 
-              className="danger" 
-              onClickCapture={handleChildCapture} onClick={handleChildBubble}
+            <BrutalButton
+              className="danger"
+              onClickCapture={handleChildCapture}
+              onClick={handleChildBubble}
             >
               Child Button
             </BrutalButton>
           </div>
         </div>
-        
+
         <BrutalButton onClick={clearPropLog}>Clear Logs</BrutalButton>
         <BrutalCode>
-          {propLog.length === 0 ? "Logs will appear here..." : propLog.map((log, i) => <div key={i}>{log}</div>)}
+          {propLog.length === 0
+            ? "Logs will appear here..."
+            : propLog.map((log, i) => <div key={i}>{log}</div>)}
         </BrutalCode>
       </BrutalContainer>
 
@@ -303,7 +318,10 @@ const Assignment: React.FC = () => {
       <BrutalContainer className="bg-yellow">
         <ComicHeading style={{ fontSize: "1.5rem" }}>4. Event Delegation</ComicHeading>
         <p>One EventListener on the Parent handling all children.</p>
-        <div ref={delegationContainerRef} style={{ padding: '10px', border: '3px solid black', background: '#fff' }}>
+        <div
+          ref={delegationContainerRef}
+          style={{ padding: "10px", border: "3px solid black", background: "#fff" }}
+        >
           <b>Parent Container</b>
           <TaskListCard className="task-item">Task A</TaskListCard>
           <TaskListCard className="task-item">Task B</TaskListCard>
@@ -314,20 +332,32 @@ const Assignment: React.FC = () => {
 
       {/* 5. DOM Manipulation Showcase */}
       <BrutalContainer className="bg-blue">
-         <SpeechBubble>BOOM!</SpeechBubble>
+        <SpeechBubble>BOOM!</SpeechBubble>
         <ComicHeading style={{ fontSize: "1.5rem" }}>5. DOM Manipulation</ComicHeading>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', marginBottom: '20px' }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "5px", marginBottom: "20px" }}>
           <BrutalButton onClick={addBefore}>before()</BrutalButton>
           <BrutalButton onClick={addAfter}>after()</BrutalButton>
           <BrutalButton onClick={doPrepend}>prepend()</BrutalButton>
           <BrutalButton onClick={doAppend}>append()</BrutalButton>
           <BrutalButton onClick={doReplace}>replaceWith()</BrutalButton>
-          <BrutalButton className="danger" onClick={doRemove}>remove()</BrutalButton>
-          <BrutalButton className="warning" onClick={cleanupDom}>Reset</BrutalButton>
+          <BrutalButton className="danger" onClick={doRemove}>
+            remove()
+          </BrutalButton>
+          <BrutalButton className="warning" onClick={cleanupDom}>
+            Reset
+          </BrutalButton>
         </div>
 
-        <div style={{ padding: '20px', border: '3px dashed black', textAlign: 'center' }}>
-          <div ref={domShowcaseRef} style={{ border: '3px solid black', background: '#fff', padding: '10px', display: 'inline-block' }}>
+        <div style={{ padding: "20px", border: "3px dashed black", textAlign: "center" }}>
+          <div
+            ref={domShowcaseRef}
+            style={{
+              border: "3px solid black",
+              background: "#fff",
+              padding: "10px",
+              display: "inline-block",
+            }}
+          >
             <b>Target Element</b>
           </div>
         </div>
@@ -336,22 +366,40 @@ const Assignment: React.FC = () => {
       {/* 6. Document Fragment Demo */}
       <BrutalContainer className="bg-pink">
         <ComicHeading style={{ fontSize: "1.5rem" }}>6. Document Fragment</ComicHeading>
-        <BrutalButton className="warning" onClick={renderWithoutFragment}>Render Without Fragment</BrutalButton>
-        <BrutalButton className="success" onClick={renderWithFragment}>Render With Fragment</BrutalButton>
+        <BrutalButton className="warning" onClick={renderWithoutFragment}>
+          Render Without Fragment
+        </BrutalButton>
+        <BrutalButton className="success" onClick={renderWithFragment}>
+          Render With Fragment
+        </BrutalButton>
         <BrutalCode>Performance: {perfLog || "Run a test"}</BrutalCode>
-        <div ref={fragmentContainerRef} style={{ maxHeight: '150px', overflowY: 'auto', border: '3px solid black', background: '#fff', padding: '5px' }}></div>
+        <div
+          ref={fragmentContainerRef}
+          style={{
+            maxHeight: "150px",
+            overflowY: "auto",
+            border: "3px solid black",
+            background: "#fff",
+            padding: "5px",
+          }}
+        ></div>
       </BrutalContainer>
 
       {/* 7 & 8. DOM Tree Visualizer and Inspector */}
       <BrutalContainer className="bg-green">
         <ComicHeading style={{ fontSize: "1.5rem" }}>7. Tree & 8. Inspector</ComicHeading>
         <p>Click a task below to inspect its data attributes.</p>
-        <div style={{ display: 'flex', gap: '20px' }}>
-          <div style={{ flex: 1, border: '3px solid black', background: '#fff', padding: '10px' }} onClick={handleInspectorClick}>
+        <div style={{ display: "flex", gap: "20px" }}>
+          <div
+            style={{ flex: 1, border: "3px solid black", background: "#fff", padding: "10px" }}
+            onClick={handleInspectorClick}
+          >
             <b>BODY</b>
-            <div style={{ marginLeft: '20px', borderLeft: '2px solid black', paddingLeft: '10px' }}>
+            <div style={{ marginLeft: "20px", borderLeft: "2px solid black", paddingLeft: "10px" }}>
               <b>MAIN</b>
-              <div style={{ marginLeft: '20px', borderLeft: '2px solid black', paddingLeft: '10px' }}>
+              <div
+                style={{ marginLeft: "20px", borderLeft: "2px solid black", paddingLeft: "10px" }}
+              >
                 <b>TASK LIST</b>
                 <TaskListCard data-id="1" data-status="pending" data-category="work">
                   Learn DOM APIs
@@ -363,7 +411,7 @@ const Assignment: React.FC = () => {
             </div>
           </div>
           <div style={{ flex: 1 }}>
-            <BrutalCode style={{ height: '100%', margin: 0 }}>
+            <BrutalCode style={{ height: "100%", margin: 0 }}>
               {inspectorData || "Click a task to inspect..."}
             </BrutalCode>
           </div>
@@ -376,20 +424,32 @@ const Assignment: React.FC = () => {
         <ComicHeading style={{ fontSize: "1.5rem" }}>9. Mutation Observer</ComicHeading>
         <BrutalButton onClick={mutateAdd}>Add Node</BrutalButton>
         <BrutalButton onClick={mutateUpdate}>Update Node Attributes</BrutalButton>
-        <BrutalButton className="danger" onClick={mutateDelete}>Delete Node</BrutalButton>
-        
-        <div style={{ display: 'flex', gap: '20px', marginTop: '15px' }}>
-          <div ref={mutationContainerRef} style={{ flex: 1, border: '3px solid black', background: '#fff', padding: '10px', minHeight: '100px' }}>
+        <BrutalButton className="danger" onClick={mutateDelete}>
+          Delete Node
+        </BrutalButton>
+
+        <div style={{ display: "flex", gap: "20px", marginTop: "15px" }}>
+          <div
+            ref={mutationContainerRef}
+            style={{
+              flex: 1,
+              border: "3px solid black",
+              background: "#fff",
+              padding: "10px",
+              minHeight: "100px",
+            }}
+          >
             <div className="task-item">Initial Task</div>
           </div>
           <div style={{ flex: 1 }}>
-            <BrutalCode style={{ height: '100%', margin: 0 }}>
-              {mutationLogs.length === 0 ? "Watching for mutations..." : mutationLogs.slice(-5).map((log, i) => <div key={i}>{log}</div>)}
+            <BrutalCode style={{ height: "100%", margin: 0 }}>
+              {mutationLogs.length === 0
+                ? "Watching for mutations..."
+                : mutationLogs.slice(-5).map((log, i) => <div key={i}>{log}</div>)}
             </BrutalCode>
           </div>
         </div>
       </BrutalContainer>
-
     </Container>
   );
 };
