@@ -26,6 +26,7 @@ import {
   AssignmentRounded,
   LocalFireDepartmentRounded,
   EmojiEventsRounded,
+  SportsEsportsRounded,
 } from "@mui/icons-material";
 import {
   Dialog,
@@ -231,9 +232,7 @@ export const ProfileSidebar = () => {
               showToast("Error in profile picture URL", { type: "error" });
               throw new Error("Error in profile picture URL");
             }}
-          >
-            {name ? name[0].toUpperCase() : undefined}
-          </UserAvatar>
+          />
         </IconButton>
       </Tooltip>
       <StyledSwipeableDrawer
@@ -332,6 +331,12 @@ export const ProfileSidebar = () => {
         <MenuLink to="/assignment">
           <StyledMenuItem onClick={handleClose}>
             <AssignmentRounded /> &nbsp; Assignment Demo
+          </StyledMenuItem>
+        </MenuLink>
+
+        <MenuLink to="/arcade">
+          <StyledMenuItem onClick={handleClose}>
+            <SportsEsportsRounded /> &nbsp; Arcade
           </StyledMenuItem>
         </MenuLink>
 
@@ -454,9 +459,7 @@ export const ProfileSidebar = () => {
                 src={avatarSrc || undefined}
                 $hasImage={profilePicture !== null}
                 size="44px"
-              >
-                {name ? name[0].toUpperCase() : undefined}
-              </UserAvatar>
+              />
               <h4 style={{ margin: 0, fontWeight: 600 }}> {name || "User"}</h4>{" "}
               {(name === null || name === "") && profilePicture === null && <PulseMenuLabel />}
             </ProfileMenuItem>
@@ -557,7 +560,7 @@ const PulseMenuLabel = () => {
 // TODO: make avatar sticky on pages with TopBar.tsx
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
   right: 16vw;
   top: 14px;
   z-index: 900;

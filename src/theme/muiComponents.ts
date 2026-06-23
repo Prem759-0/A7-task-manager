@@ -17,8 +17,8 @@ export const muiComponentsProps: Theme["components"] = {
         fontWeight: "bold",
         fontSize: "0.9rem",
         fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif",
-      }
-    }
+      },
+    },
   },
   MuiButton: {
     styleOverrides: {
@@ -43,14 +43,14 @@ export const muiComponentsProps: Theme["components"] = {
         "&.Mui-disabled": {
           opacity: 0.7,
           border: "3px solid #000",
-        }
+        },
       },
       contained: {
         boxShadow: "4px 4px 0px #000 !important",
         "&:hover": {
           boxShadow: "2px 2px 0px #000 !important",
         },
-      }
+      },
     },
   },
   MuiSelect: {
@@ -61,11 +61,11 @@ export const muiComponentsProps: Theme["components"] = {
         boxShadow: "4px 4px 0px #000",
         "&.Mui-focused": {
           backgroundColor: "#fef08a",
-        }
+        },
       },
       select: {
         fontWeight: "bold",
-      }
+      },
     },
   },
   MuiDialog: {
@@ -114,11 +114,11 @@ export const muiComponentsProps: Theme["components"] = {
             backgroundColor: "#fef08a",
             transform: "translate(-1px, -1px)",
             boxShadow: "5px 5px 0px #000",
-          }
+          },
         },
         "& .MuiOutlinedInput-notchedOutline": {
           border: "none",
-        }
+        },
       },
     },
   },
@@ -128,8 +128,8 @@ export const muiComponentsProps: Theme["components"] = {
         borderRadius: "8px",
         border: "3px solid #000",
         boxShadow: "6px 6px 0px #000",
-      }
-    }
+      },
+    },
   },
   MuiCard: {
     styleOverrides: {
@@ -137,8 +137,8 @@ export const muiComponentsProps: Theme["components"] = {
         borderRadius: "8px",
         border: "3px solid #000",
         boxShadow: "4px 4px 0px #000",
-      }
-    }
+      },
+    },
   },
   MuiBottomNavigationAction: {
     styleOverrides: {
@@ -149,8 +149,8 @@ export const muiComponentsProps: Theme["components"] = {
           backgroundColor: "rgba(0,0,0,0.05)",
           transform: "translate(0, -2px)",
           boxShadow: "2px 2px 0px #000",
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 };

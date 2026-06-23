@@ -26,7 +26,11 @@ export default function AboutTab() {
       <Typography variant="caption" sx={{ display: "block", mt: 2 }}>
         Created by <Link href="https://github.com/Prem759-0">Prem Gaikwad</Link> <br />
         Explore the project on GitHub:{" "}
-        <Link href="https://github.com/Prem759-0/A7-task-manager" target="_blank" rel="noopener noreferrer">
+        <Link
+          href="https://github.com/Prem759-0/A7-task-manager"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Todo App Repository
         </Link>
       </Typography>

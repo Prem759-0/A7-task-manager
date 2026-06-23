@@ -18,6 +18,7 @@ export const defaultUser: User = {
   xp: 0,
   streak: 0,
   lastActiveDate: null,
+  unlockedAchievements: [],
   settings: {
     enableCategories: true,
     doneToBottom: false,

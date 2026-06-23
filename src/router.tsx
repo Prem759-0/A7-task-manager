@@ -7,6 +7,7 @@ const TaskDetails = lazy(() => import("./pages/TaskDetails"));
 const SharePage = lazy(() => import("./pages/Share"));
 const AddTask = lazy(() => import("./pages/AddTask"));
 const UserProfile = lazy(() => import("./pages/UserProfile"));
+const Arcade = lazy(() => import("./pages/Arcade"));
 const Transfer = lazy(() => import("./pages/Transfer"));
 const Categories = lazy(() => import("./pages/Categories"));
 const Purge = lazy(() => import("./pages/Purge"));
@@ -28,6 +29,7 @@ const AppRouter = (): ReactElement => {
         <Route path="/purge" element={<Purge />} />
         <Route path="/sync" element={<Sync />} />
         <Route path="/assignment" element={<Assignment />} />
+        <Route path="/arcade" element={<Arcade />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

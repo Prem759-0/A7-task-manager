@@ -67,6 +67,7 @@ export const UserAvatar = styled(UnstyledAvatar)<UserAvatarProps>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
   font-size: ${({ size }) => `calc(${size} / 2)`};
+  border: 3px solid #000;
   ${({ $pulse, theme }) =>
     $pulse &&
     css`

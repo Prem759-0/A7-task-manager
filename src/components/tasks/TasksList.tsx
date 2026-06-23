@@ -271,7 +271,12 @@ export const TasksList: React.FC = () => {
       const newlyDoneCount = prevUser.tasks.filter(
         (t) => multipleSelectedTasks.includes(t.id) && !t.done,
       ).length;
-      const gamificationUpdate = awardGamification(prevUser, newlyDoneCount > 0, newlyDoneCount);
+      const gamificationUpdate = awardGamification(
+        prevUser,
+        newlyDoneCount > 0,
+        newlyDoneCount,
+        updatedTasks,
+      );
 
       return {
         ...prevUser,

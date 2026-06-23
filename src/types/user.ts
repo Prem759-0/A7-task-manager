@@ -35,6 +35,7 @@ export interface User {
   xp: number;
   streak: number;
   lastActiveDate: Date | null;
+  unlockedAchievements: string[];
 }
 
 /**

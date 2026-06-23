@@ -78,7 +78,7 @@ export const TaskMenu = () => {
         return task;
       });
       setUser((prevUser) => {
-        const gamificationUpdate = awardGamification(prevUser, !selectedTask.done);
+        const gamificationUpdate = awardGamification(prevUser, !selectedTask.done, 1, updatedTasks);
         return {
           ...prevUser,
           ...gamificationUpdate,

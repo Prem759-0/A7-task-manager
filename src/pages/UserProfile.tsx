@@ -41,6 +41,7 @@ import {
   ALLOWED_PFP_TYPES,
 } from "../utils/profilePictureStorage";
 import { ColorPalette } from "../theme/themeConfig";
+import { ACHIEVEMENTS, calculateLevel } from "../utils/gamification";
 
 // TODO: move this to settings dialog
 const UserProfile = () => {
@@ -253,9 +254,7 @@ const UserProfile = () => {
               $hasImage={profilePicture !== null}
               style={{ cursor: "pointer" }}
               size="96px"
-            >
-              {name ? name[0].toUpperCase() : undefined}
-            </UserAvatar>
+            />
           </Badge>
         </Tooltip>
         {showBrokenPfpAlert &&
@@ -312,6 +311,68 @@ const UserProfile = () => {
           <Logout />
           &nbsp; Logout
         </Button>
+
+        <Divider
+          sx={{ width: "100%", my: 2, borderColor: "rgba(0,0,0,0.2)", borderWidth: "2px" }}
+        />
+
+        <StatsContainer>
+          <StatBox>
+            <Typography variant="overline" fontWeight={900}>
+              Level
+            </Typography>
+            <Typography variant="h4" fontWeight={900} color={ColorPalette.purple}>
+              {calculateLevel(user.xp || 0)}
+            </Typography>
+            <Typography variant="caption" fontWeight={600}>
+              {user.xp || 0} XP
+            </Typography>
+          </StatBox>
+          <StatBox>
+            <Typography variant="overline" fontWeight={900}>
+              Streak
+            </Typography>
+            <Typography variant="h4" fontWeight={900} color={ColorPalette.orange}>
+              {user.streak || 0}
+            </Typography>
+            <Typography variant="caption" fontWeight={600}>
+              Days
+            </Typography>
+          </StatBox>
+        </StatsContainer>
+
+        <Typography variant="h6" fontWeight={900} mt={3} mb={1} width="100%" textAlign="left">
+          BADGES
+        </Typography>
+
+        <BadgesGrid>
+          {ACHIEVEMENTS.map((achievement) => {
+            const isUnlocked = (user.unlockedAchievements || []).includes(achievement.id);
+            return (
+              <Tooltip
+                key={achievement.id}
+                title={
+                  <div style={{ textAlign: "center" }}>
+                    <Typography variant="subtitle2" fontWeight={900}>
+                      {achievement.name}
+                    </Typography>
+                    <Typography variant="caption">{achievement.description}</Typography>
+                    {!isUnlocked && (
+                      <Typography variant="caption" color="error" display="block" mt={1}>
+                        Locked 🔒
+                      </Typography>
+                    )}
+                  </div>
+                }
+                arrow
+              >
+                <BadgeItem $unlocked={isUnlocked} $color={achievement.color}>
+                  <BadgeEmoji>{achievement.emoji}</BadgeEmoji>
+                </BadgeItem>
+              </Tooltip>
+            );
+          })}
+        </BadgesGrid>
       </Container>
       <Dialog open={openChangeImage} onClose={handleCloseImageDialog}>
         <CustomDialogTitle
@@ -432,11 +493,6 @@ const Container = styled.div<{ glow: boolean }>`
   gap: 14px;
   flex-direction: column;
   align-items: center;
-  flex-direction: column;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 `;
 
 const SaveBtn = styled(Button)`
@@ -496,4 +552,54 @@ const BrokenPfpAlert = styled(Alert)`
   padding: 0 8px;
   align-items: center;
   animation: ${fadeIn} 0.5s ease-in;
+`;
+
+const StatsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+`;
+
+const StatBox = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: ${({ theme }) => (theme.darkmode ? "#2f2f2f" : "#ffffff")};
+  border: 3px solid #000;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 4px 4px 0px #000;
+`;
+
+const BadgesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 16px;
+  width: 100%;
+`;
+
+const BadgeItem = styled.div<{ $unlocked: boolean; $color: string }>`
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 3px solid #000;
+  background: ${({ $unlocked, $color, theme }) =>
+    $unlocked ? $color : theme.darkmode ? "#444" : "#e0e0e0"};
+  box-shadow: ${({ $unlocked }) => ($unlocked ? "3px 3px 0px #000" : "none")};
+  opacity: ${({ $unlocked }) => ($unlocked ? 1 : 0.4)};
+  filter: ${({ $unlocked }) => ($unlocked ? "none" : "grayscale(100%)")};
+  cursor: help;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  &:hover {
+    transform: ${({ $unlocked }) => ($unlocked ? "scale(1.1) rotate(-5deg)" : "none")};
+  }
+`;
+
+const BadgeEmoji = styled.span`
+  font-size: 28px;
 `;

@@ -11,14 +11,22 @@ export const BrutalContainer = styled.div`
   overflow: hidden;
   color: #000000;
 
-  &.bg-yellow { background-color: #fde047; }
-  &.bg-pink { background-color: #f9a8d4; }
-  &.bg-blue { background-color: #93c5fd; }
-  &.bg-green { background-color: #86efac; }
+  &.bg-yellow {
+    background-color: #fde047;
+  }
+  &.bg-pink {
+    background-color: #f9a8d4;
+  }
+  &.bg-blue {
+    background-color: #93c5fd;
+  }
+  &.bg-green {
+    background-color: #86efac;
+  }
 `;
 
 export const ComicHeading = styled.h2`
-  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", sans-serif;
   font-size: 2rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -56,10 +64,18 @@ export const BrutalButton = styled.button`
     box-shadow: 0px 0px 0px #000000;
   }
 
-  &.action { background-color: #3b82f6; }
-  &.danger { background-color: #ef4444; }
-  &.success { background-color: #22c55e; }
-  &.warning { background-color: #eab308; }
+  &.action {
+    background-color: #3b82f6;
+  }
+  &.danger {
+    background-color: #ef4444;
+  }
+  &.success {
+    background-color: #22c55e;
+  }
+  &.warning {
+    background-color: #eab308;
+  }
 `;
 
 export const SpeechBubble = styled.div`
@@ -76,10 +92,10 @@ export const SpeechBubble = styled.div`
   transform: rotate(15deg);
   box-shadow: 3px 3px 0px #000000;
   z-index: 10;
-  font-family: 'Comic Sans MS', sans-serif;
+  font-family: "Comic Sans MS", sans-serif;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -10px;
     left: 10px;
@@ -100,7 +116,7 @@ export const BrutalInput = styled.input`
   margin: 10px 0;
   width: 100%;
   max-width: 300px;
-  
+
   &:focus {
     outline: none;
     background-color: #fef08a;
@@ -136,11 +152,19 @@ export const FlowchartCard = styled.div`
   box-shadow: 3px 3px 0px #000;
   text-align: center;
   width: 250px;
-  
-  &.html { background: #fca5a5; }
-  &.css { background: #93c5fd; }
-  &.dom { background: #86efac; }
-  &.render { background: #fde047; }
+
+  &.html {
+    background: #fca5a5;
+  }
+  &.css {
+    background: #93c5fd;
+  }
+  &.dom {
+    background: #86efac;
+  }
+  &.render {
+    background: #fde047;
+  }
 `;
 
 export const FlowArrow = styled.div`

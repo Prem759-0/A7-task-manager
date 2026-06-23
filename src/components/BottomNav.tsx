@@ -4,7 +4,6 @@ import {
   GetAppRounded,
   PersonRounded,
   TaskAlt,
-  AssignmentRounded,
 } from "@mui/icons-material";
 import {
   Badge,
@@ -129,11 +128,6 @@ export const BottomNav = (): JSX.Element | null => {
           label="Profile"
           icon={<PersonRounded sx={{ fontSize: smallIconSize }} />}
         />
-        <NavigationButton
-          onClick={() => n("assignment")}
-          label="Assignment"
-          icon={<AssignmentRounded sx={{ fontSize: smallIconSize }} />}
-        />
       </StyledBottomNavigation>
     </Container>
   );
@@ -196,7 +190,8 @@ const NavigationButton = styled(BottomNavigationAction)`
   &.Mui-selected {
     border: 3px solid #000;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.palette.primary.main};
+    color: ${({ theme }) => getFontColor(theme.palette.primary.main)};
     transform: translate(0, -6px);
     box-shadow: 4px 4px 0px #000;
   }

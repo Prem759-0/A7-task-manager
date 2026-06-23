@@ -9,6 +9,7 @@ export const awardGamification = (
   user: User,
   taskWasCompleted: boolean,
   count: number = 1,
+  updatedTasks?: typeof user.tasks,
 ): Partial<User> => {
   if (!taskWasCompleted) return {}; // If task was unmarked, maybe don't remove XP for now, or keep it simple.
 
@@ -49,9 +50,83 @@ export const awardGamification = (
     showToast(`Level Up! You are now Level ${newLevel} 🎉`, { type: "success" });
   }
 
+  // Check for achievements
+  const tempUser = { ...user, xp: newXp, streak: newStreak, tasks: updatedTasks || user.tasks };
+  const newlyUnlocked = checkAchievements(tempUser);
+  const updatedUnlockedAchievements = [...(user.unlockedAchievements || []), ...newlyUnlocked];
+
   return {
     xp: newXp,
     streak: newStreak,
     lastActiveDate: now,
+    unlockedAchievements: updatedUnlockedAchievements,
   };
+};
+
+export interface Achievement {
+  id: string;
+  name: string;
+  description: string;
+  emoji: string;
+  color: string;
+  checkUnlocked: (user: User) => boolean;
+}
+
+export const ACHIEVEMENTS: Achievement[] = [
+  {
+    id: "first_blood",
+    name: "First Blood",
+    description: "Complete your very first task.",
+    emoji: "🔥",
+    color: "#ff2f2f", // Red
+    checkUnlocked: (user) => user.tasks.filter((t) => t.done).length >= 1,
+  },
+  {
+    id: "task_destroyer",
+    name: "Task Destroyer",
+    description: "Complete 10 tasks.",
+    emoji: "💣",
+    color: "#ff9518", // Orange
+    checkUnlocked: (user) => user.tasks.filter((t) => t.done).length >= 10,
+  },
+  {
+    id: "unstoppable",
+    name: "Unstoppable",
+    description: "Maintain a 3-day streak.",
+    emoji: "⚡",
+    color: "#ffea28", // Yellow
+    checkUnlocked: (user) => (user.streak || 0) >= 3,
+  },
+  {
+    id: "level_boss",
+    name: "Level Boss",
+    description: "Reach Level 5.",
+    emoji: "👑",
+    color: "#a445ff", // Purple
+    checkUnlocked: (user) => calculateLevel(user.xp || 0) >= 5,
+  },
+  {
+    id: "organization_freak",
+    name: "Organization Freak",
+    description: "Create 3 custom categories.",
+    emoji: "📂",
+    color: "#3ae836", // Green
+    checkUnlocked: (user) => user.categories.length >= 3,
+  },
+];
+
+export const checkAchievements = (user: User): string[] => {
+  const newlyUnlocked: string[] = [];
+  const currentlyUnlocked = user.unlockedAchievements || [];
+
+  for (const achievement of ACHIEVEMENTS) {
+    if (!currentlyUnlocked.includes(achievement.id) && achievement.checkUnlocked(user)) {
+      newlyUnlocked.push(achievement.id);
+      showToast(`POW! Achievement Unlocked: ${achievement.name} ${achievement.emoji}`, {
+        type: "success",
+      });
+    }
+  }
+
+  return newlyUnlocked;
 };
